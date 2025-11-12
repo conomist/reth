@@ -18,6 +18,10 @@ pub struct StaticFilesArgs {
     /// Number of blocks per file for the receipts segment.
     #[arg(long = "static-files.blocks-per-file.receipts")]
     pub blocks_per_file_receipts: Option<u64>,
+
+    /// Number of blocks per file for the account changesets segment.
+    #[arg(long = "static-files.blocks-per-file.account-change-sets")]
+    pub blocks_per_file_account_change_sets: Option<u64>,
 }
 
 impl StaticFilesArgs {
@@ -31,6 +35,9 @@ impl StaticFilesArgs {
                     .blocks_per_file_transactions
                     .or(config.blocks_per_file.transactions),
                 receipts: self.blocks_per_file_receipts.or(config.blocks_per_file.receipts),
+                account_change_sets: self
+                    .blocks_per_file_account_change_sets
+                    .or(config.blocks_per_file.account_change_sets),
             },
         }
     }
