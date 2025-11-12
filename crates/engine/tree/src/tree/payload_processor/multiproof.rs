@@ -921,11 +921,14 @@ impl MultiProofTask {
 
         let mut spawned_proof_targets = MultiProofTargets::default();
 
+        // Chunk if there are more than 50 proof targets
+        let many_proof_targets = not_fetched_state_update.chunking_length() > 50;
+
         // Only chunk if multiple account or storage workers are available to take advantage of
         // parallelism.
         let should_chunk = self.multiproof_manager.proof_worker_handle.available_account_workers() >
             1 ||
-            self.multiproof_manager.proof_worker_handle.available_storage_workers() > 1;
+            self.multiproof_manager.proof_worker_handle.available_storage_workers() > 1 || many_proof_targets;
 
         let mut dispatch = |hashed_state_update| {
             let proof_targets = get_proof_targets(
