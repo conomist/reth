@@ -1,6 +1,6 @@
 //! Test helper impls for transactions
 
-#![allow(dead_code)]
+#[cfg(any(test, feature = "test-utils"))]
 
 use crate::{
     cache::LruCache,
