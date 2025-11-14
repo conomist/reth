@@ -10,9 +10,9 @@ use crate::{
         policy::NetworkPolicies,
         TransactionsHandle, TransactionsManager, TransactionsManagerConfig,
     },
+    use futures::StreamExt;
     NetworkConfig, NetworkConfigBuilder, NetworkHandle, NetworkManager,
 };
-use futures::{FutureExt, StreamExt};
 use pin_project::pin_project;
 use reth_chainspec::{ChainSpecProvider, EthereumHardforks, Hardforks};
 use reth_eth_wire::{
@@ -21,8 +21,8 @@ use reth_eth_wire::{
 use reth_ethereum_primitives::{PooledTransactionVariant, TransactionSigned};
 use reth_network_api::{
     events::{PeerEvent, SessionInfo},
-    test_utils::{PeersHandle, PeersHandleProvider},
-    NetworkEvent, NetworkEventListenerProvider, NetworkInfo, Peers,
+     test_utils::PeersHandle,
+    NetworkEvent,
 };
 use reth_network_peers::PeerId;
 use reth_storage_api::{
